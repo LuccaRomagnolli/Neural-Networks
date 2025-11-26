@@ -151,15 +151,3 @@ Desenvolvido como projeto de aprendizado em Deep Reinforcement Learning.
 ---
 
 **Nota**: O treinamento pode levar várias horas para alcançar um bom desempenho. Seja paciente e observe a melhoria gradual nas pontuações!
-```
-
-O README inclui:
-- Descrição do projeto
-- Tecnologias utilizadas
-- Estrutura do projeto
-- Instruções de instalação e uso
-- Explicação do algoritmo DQN
-- Parâmetros de treinamento
-- Informações sobre monitoramento
-
-Você está em modo de leitura. Para aplicar as alterações, copie o conteúdo acima para o arquivo `README.md` ou alterne para o modo de edição.
