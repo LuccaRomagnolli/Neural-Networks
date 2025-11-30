@@ -140,13 +140,11 @@ Algumas melhorias possíveis para o projeto:
 - Adicionar mais características ao estado
 - Ajustar hiperparâmetros para melhor desempenho
 
-## 📝 Licença
 
-Este projeto está sob a licença especificada no arquivo `LICENSE`.
 
 ## 👨‍💻 Autor
 
-Desenvolvido como projeto de aprendizado em Deep Reinforcement Learning.
+Desenvolvido por Lucca Maximus Romagnolli
 
 ---
 
