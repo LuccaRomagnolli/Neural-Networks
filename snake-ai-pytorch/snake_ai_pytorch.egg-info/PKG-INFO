@@ -1,7 +1,18 @@
-# 🐍 Snake AI PyTorch 
-## Autor: Lucca Maximus Romagnolli
+Metadata-Version: 2.4
+Name: snake-ai-pytorch
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+Requires-Dist: ipython>=9.7.0
+Requires-Dist: matplotlib>=3.10.7
+Requires-Dist: numpy>=2.3.5
+Requires-Dist: pygame>=2.6.1
+Requires-Dist: torch>=2.9.1
 
-A seguir veja o passo a passo para executar o projeto:
+# 🐍 Guia Completo de Instalação e Execução - Snake AI PyTorch
+
+Este guia explica **cada passo** necessário para configurar e executar o projeto Snake AI, como se você tivesse acabado de clonar o repositório.
 
 ---
 
@@ -326,5 +337,5 @@ Depois de conseguir executar o projeto:
 
 ---
 
-**Boa sorte com o treinamento!**
+**Boa sorte com o treinamento! 🐍🤖**
 

@@ -3,10 +3,19 @@ import random
 from enum import Enum
 from collections import namedtuple
 import numpy as np
+import os
 
 pygame.init()
-font = pygame.font.Font('arial.ttf', 25)
-#font = pygame.font.SysFont('arial', 25)
+
+# Get the directory where this script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
+font_path = os.path.join(script_dir, 'arial.ttf')
+
+# Try to load custom font, fallback to system font if not found
+try:
+    font = pygame.font.Font(font_path, 25)
+except FileNotFoundError:
+    font = pygame.font.SysFont('arial', 25)
 
 class Direction(Enum):
     RIGHT = 1

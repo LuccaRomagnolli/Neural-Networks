@@ -1,0 +1,12 @@
+README.md
+agent.py
+game.py
+helper.py
+model.py
+pyproject.toml
+snake_game_human.py
+snake_ai_pytorch.egg-info/PKG-INFO
+snake_ai_pytorch.egg-info/SOURCES.txt
+snake_ai_pytorch.egg-info/dependency_links.txt
+snake_ai_pytorch.egg-info/requires.txt
+snake_ai_pytorch.egg-info/top_level.txt

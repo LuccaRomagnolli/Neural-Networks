@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "snake-ai-pytorch"
 version = "0.1.0"
@@ -11,3 +15,6 @@ dependencies = [
     "pygame>=2.6.1",
     "torch>=2.9.1",
 ]
+
+[tool.setuptools]
+py-modules = ["agent", "game", "model", "helper", "snake_game_human"]
