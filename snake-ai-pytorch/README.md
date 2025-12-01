@@ -1,181 +1,253 @@
-# 🐍 Snake AI PyTorch 
-## Autor: Lucca Maximus Romagnolli
+# 🐍 Snake AI - Aprendizado por Reforço com PyTorch
 
-A seguir veja o passo a passo para executar o projeto:
+**Autor:** Lucca Maximus Romagnolli
+
+Um projeto de inteligência artificial que utiliza Deep Q-Learning (DQN) para treinar um agente a jogar o clássico jogo Snake. O agente aprende através de tentativa e erro, melhorando seu desempenho ao longo do tempo.
 
 ---
 
-## 📋 **PASSO 1: Verificar Pré-requisitos**
+## 📋 Índice
 
-### 1.1 Verificar Python
+- [Sobre o Projeto](#-sobre-o-projeto)
+- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+- [Pré-requisitos](#-pré-requisitos)
+- [Instalação no macOS](#-instalação-no-macos)
+- [Instalação no Windows](#-instalação-no-windows)
+- [Como Usar](#-como-usar)
+- [Como Funciona](#-como-funciona)
+- [Troubleshooting](#-troubleshooting)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+
+---
+
+## 🎯 Sobre o Projeto
+
+Este projeto implementa um agente de aprendizado por reforço que aprende a jogar Snake usando uma rede neural profunda. O algoritmo Deep Q-Network (DQN) permite que o agente aprenda a estratégia ótima através da experiência, sem necessidade de programação explícita das regras do jogo.
+
+### Características Principais:
+- ✅ Deep Q-Learning (DQN) para aprendizado
+- ✅ Visualização em tempo real do treinamento
+- ✅ Gráficos de progresso do aprendizado
+- ✅ Salvamento automático do modelo quando bate recorde
+- ✅ Modo de jogo manual para humanos
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Python 3.13+** - Linguagem de programação
+- **PyTorch 2.9.1+** - Framework de deep learning
+- **Pygame 2.6.1+** - Biblioteca para desenvolvimento de jogos
+- **NumPy 2.3.5+** - Computação numérica
+- **Matplotlib 3.10.7+** - Visualização de dados
+- **IPython 9.7.0+** - Ambiente interativo
+
+---
+
+## 📦 Pré-requisitos
+
+Antes de começar, certifique-se de ter:
+
+- **Python 3.13 ou superior** instalado
+- **pip** (gerenciador de pacotes Python)
+- **Git** (para clonar o repositório)
+
+### Verificar Instalações:
+
 ```bash
+# Verificar Python
 python3 --version
-```
-**O que faz:** Verifica se o Python 3.13 ou superior está instalado.
-**Por quê:** O projeto requer Python 3.13+ para funcionar corretamente.
-**Resultado esperado:** `Python 3.13.x` ou superior
+# Deve mostrar: Python 3.13.x ou superior
 
-### 1.2 Verificar pip
-```bash
+# Verificar pip
 pip3 --version
+# Deve mostrar: pip 24.x ou similar
 ```
-**O que faz:** Verifica se o gerenciador de pacotes pip está instalado.
-**Por quê:** O pip é necessário para instalar as dependências do projeto.
-**Resultado esperado:** `pip 24.x` ou similar
 
 ---
 
-## 📋 **PASSO 2: Instalar Dependências do Sistema (macOS)**
+## 🍎 Instalação no macOS
 
-### 2.1 Verificar Homebrew
-```bash
-which brew
-```
-**O que faz:** Verifica se o Homebrew (gerenciador de pacotes do macOS) está instalado.
-**Por quê:** O Homebrew é necessário para instalar as bibliotecas SDL2, que são dependências do pygame.
+### Passo 1: Instalar Homebrew (se não tiver)
 
-**Se não tiver Homebrew instalado:**
+O Homebrew é o gerenciador de pacotes para macOS. Se você ainda não tem, instale:
+
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
-**O que faz:** Instala o Homebrew no seu sistema.
-**Por quê:** É a forma mais fácil de instalar bibliotecas no macOS.
 
-### 2.2 Instalar SDL2 e Bibliotecas Relacionadas
+**Verificar instalação:**
+```bash
+which brew
+```
+
+### Passo 2: Instalar Dependências do Sistema (SDL2)
+
+O Pygame precisa das bibliotecas SDL2 para funcionar. Instale-as via Homebrew:
+
 ```bash
 brew install sdl2 sdl2_image sdl2_mixer sdl2_ttf
 ```
-**O que faz:** Instala as bibliotecas SDL2 necessárias para o pygame funcionar.
-**Por quê:** 
+
+**O que cada biblioteca faz:**
 - `sdl2`: Biblioteca principal para gráficos e eventos
 - `sdl2_image`: Suporte para imagens
 - `sdl2_mixer`: Suporte para áudio
-- `sdl2_ttf`: Suporte para fontes TrueType (necessário para renderizar texto no jogo)
+- `sdl2_ttf`: Suporte para fontes TrueType (necessário para renderizar texto)
 
-**Resultado esperado:** As bibliotecas são instaladas sem erros.
-
----
-
-## 📋 **PASSO 3: Navegar até o Diretório do Projeto**
+### Passo 3: Navegar até o Diretório do Projeto
 
 ```bash
 cd /Users/luccaromagnolli/Documents/Neural-Networks/snake-ai-pytorch
 ```
-**O que faz:** Muda o diretório atual para a pasta do projeto.
-**Por quê:** Todos os comandos seguintes precisam ser executados dentro desta pasta.
 
-**Verificar que está no lugar certo:**
+### Passo 4: Criar Ambiente Virtual (Recomendado)
+
+Criar um ambiente virtual isola as dependências do projeto:
+
 ```bash
-pwd
-ls -la
-```
-**O que faz:** 
-- `pwd`: Mostra o diretório atual
-- `ls -la`: Lista todos os arquivos do projeto
-
-**Arquivos esperados:**
-- `agent.py` - Código do agente de IA
-- `game.py` - Lógica do jogo
-- `model.py` - Arquitetura da rede neural
-- `helper.py` - Funções auxiliares
-- `pyproject.toml` - Configuração do projeto
-- `arial.ttf` - Fonte do jogo
-
----
-
-## 📋 **PASSO 4: Criar Ambiente Virtual (Recomendado - Opcional)**
-
-### 4.1 Criar o Ambiente Virtual
-```bash
+# Criar ambiente virtual
 python3 -m venv venv
-```
-**O que faz:** Cria um ambiente virtual Python isolado.
-**Por quê:** Mantém as dependências do projeto separadas de outros projetos Python.
 
-### 4.2 Ativar o Ambiente Virtual
-```bash
+# Ativar ambiente virtual
 source venv/bin/activate
 ```
-**O que faz:** Ativa o ambiente virtual.
-**Por quê:** A partir de agora, todos os pacotes instalados serão apenas para este projeto.
-**Resultado esperado:** O prompt do terminal mostrará `(venv)` no início.
+
+**Resultado esperado:** O prompt mostrará `(venv)` no início.
 
 **Para desativar depois:**
 ```bash
 deactivate
 ```
 
----
+### Passo 5: Instalar Dependências Python
 
-## 📋 **PASSO 5: Instalar Dependências Python**
-
-### 5.1 Opção Recomendada: Instalação via pyproject.toml
 ```bash
+# Opção 1: Instalação via pyproject.toml (Recomendado)
 pip install -e .
-```
-**O que faz:** 
-- Lê o arquivo `pyproject.toml`
-- Instala todas as dependências listadas (torch, pygame, numpy, matplotlib, ipython)
-- Instala o projeto em modo "editable" (qualquer mudança no código é refletida imediatamente)
 
-**Por quê:** Esta é a forma mais profissional e mantém as versões corretas das dependências.
-
-**Dependências que serão instaladas:**
-- `torch>=2.9.1` - Framework de deep learning (PyTorch)
-- `pygame>=2.6.1` - Biblioteca para criar o jogo
-- `numpy>=2.3.5` - Computação numérica
-- `matplotlib>=3.10.7` - Gráficos para visualizar o progresso
-- `ipython>=9.7.0` - Ambiente interativo melhorado
-
-### 5.2 Opção Alternativa: Instalação Manual
-Se a opção acima não funcionar, você pode instalar manualmente:
-```bash
+# Opção 2: Instalação manual (se a opção 1 não funcionar)
 pip install torch pygame numpy matplotlib ipython
 ```
-**O que faz:** Instala cada biblioteca individualmente.
-**Por quê:** Útil se houver problemas com a instalação via pyproject.toml.
 
-### 5.3 Verificar Instalação
+### Passo 6: Verificar Instalação
+
 ```bash
 pip list | grep -E "(torch|pygame|numpy|matplotlib|ipython)"
 ```
-**O que faz:** Lista as bibliotecas instaladas e filtra apenas as relevantes.
-**Resultado esperado:** Todas as 5 bibliotecas devem aparecer na lista.
+
+Todas as 5 bibliotecas devem aparecer na lista.
 
 ---
 
-## 📋 **PASSO 6: Verificar Arquivos Necessários**
+## 🪟 Instalação no Windows
 
-### 6.1 Verificar se a fonte existe
-```bash
-ls -la arial.ttf
+### Passo 1: Instalar Python
+
+1. Baixe o Python 3.13+ do site oficial: [python.org/downloads](https://www.python.org/downloads/)
+2. Durante a instalação, **marque a opção "Add Python to PATH"**
+3. Verifique a instalação:
+
+```cmd
+python --version
 ```
-**O que faz:** Verifica se o arquivo de fonte existe.
-**Por quê:** O jogo precisa desta fonte para renderizar o texto da pontuação.
 
-**Se não existir:** O jogo pode não funcionar corretamente ou pode usar uma fonte padrão do sistema.
+### Passo 2: Instalar Visual C++ Build Tools (Opcional, mas Recomendado)
+
+O Pygame pode precisar compilar algumas extensões. Para isso, você pode precisar do Visual C++ Build Tools:
+
+1. Baixe o **Visual Studio Build Tools** ou **Visual Studio Community** (versão gratuita)
+2. Durante a instalação, selecione "Desktop development with C++"
+3. Ou instale diretamente: [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022)
+
+**Alternativa mais simples:** O Pygame geralmente vem com wheels pré-compiladas, então este passo pode não ser necessário.
+
+### Passo 3: Abrir Terminal/Prompt de Comando
+
+- Pressione `Win + R`, digite `cmd` e pressione Enter
+- Ou use PowerShell (clique com botão direito no menu Iniciar → Windows PowerShell)
+
+### Passo 4: Navegar até o Diretório do Projeto
+
+```cmd
+cd C:\Users\SeuUsuario\Documents\Neural-Networks\snake-ai-pytorch
+```
+
+**Nota:** Ajuste o caminho conforme a localização do seu projeto.
+
+### Passo 5: Criar Ambiente Virtual (Recomendado)
+
+```cmd
+# Criar ambiente virtual
+python -m venv venv
+
+# Ativar ambiente virtual
+venv\Scripts\activate
+```
+
+**Resultado esperado:** O prompt mostrará `(venv)` no início.
+
+**Para desativar depois:**
+```cmd
+deactivate
+```
+
+### Passo 6: Instalar Dependências Python
+
+```cmd
+# Atualizar pip primeiro (recomendado)
+python -m pip install --upgrade pip
+
+# Opção 1: Instalação via pyproject.toml (Recomendado)
+pip install -e .
+
+# Opção 2: Instalação manual (se a opção 1 não funcionar)
+pip install torch pygame numpy matplotlib ipython
+```
+
+**Nota:** Se encontrar problemas com PyTorch, tente instalar separadamente:
+
+```cmd
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+```
+
+### Passo 7: Verificar Instalação
+
+```cmd
+pip list | findstr "torch pygame numpy matplotlib ipython"
+```
+
+Todas as 5 bibliotecas devem aparecer na lista.
 
 ---
 
-## 📋 **PASSO 7: Executar o Projeto**
+## 🎮 Como Usar
 
-### 7.1 Treinar a IA (Modo Principal)
+### Treinar a IA (Modo Principal)
+
+Para treinar o agente de IA, execute:
+
 ```bash
+# macOS/Linux
+python3 agent.py
+
+# Windows
 python agent.py
 ```
-**O que faz:** 
-- Inicia o treinamento do agente de IA
-- Abre uma janela do jogo mostrando a cobra sendo controlada pela IA
-- Mostra gráficos em tempo real do progresso do aprendizado
-- Salva automaticamente o modelo quando um novo recorde é alcançado
+
+**O que acontece:**
+- Uma janela do jogo (640x480 pixels) será aberta
+- A cobra será controlada pela IA
+- Gráficos em tempo real mostrarão o progresso do aprendizado
+- O modelo será salvo automaticamente na pasta `model/` quando um novo recorde for alcançado
 
 **O que você verá:**
-1. **Janela do Jogo:** Uma janela 640x480 pixels com:
-   - A cobra (azul) se movendo
-   - A comida (vermelha)
-   - A pontuação atual no canto superior esquerdo
+1. **Janela do Jogo:**
+   - Cobra (azul) se movendo
+   - Comida (vermelha)
+   - Pontuação atual no canto superior esquerdo
 
-2. **Gráficos:** Gráficos mostrando:
+2. **Gráficos:**
    - Pontuação de cada jogo (linha azul)
    - Média de pontuação ao longo do tempo (linha laranja)
 
@@ -187,144 +259,269 @@ python agent.py
    ...
    ```
 
-**Como funciona:**
-- A IA começa jogando de forma aleatória (exploração)
-- Conforme joga mais, ela aprende estratégias melhores
-- O modelo é salvo na pasta `model/` quando bate um recorde
-- O treinamento continua indefinidamente até você fechar a janela
-
 **Para parar:** Feche a janela do jogo ou pressione `Ctrl+C` no terminal.
 
-### 7.2 Jogar Manualmente (Modo Humano)
+### Jogar Manualmente (Modo Humano)
+
+Para jogar o jogo manualmente (sem IA):
+
 ```bash
+# macOS/Linux
+python3 snake_game_human.py
+
+# Windows
 python snake_game_human.py
 ```
-**O que faz:** Abre o jogo para você jogar manualmente (sem IA).
 
 **Controles:**
-- ⬆️ Seta para cima: Mover para cima
-- ⬇️ Seta para baixo: Mover para baixo
-- ⬅️ Seta para esquerda: Mover para esquerda
-- ➡️ Seta para direita: Mover para direita
+- ⬆️ **Seta para cima:** Mover para cima
+- ⬇️ **Seta para baixo:** Mover para baixo
+- ⬅️ **Seta para esquerda:** Mover para esquerda
+- ➡️ **Seta para direita:** Mover para direita
 
 **Objetivo:** Comer a comida (quadrado vermelho) sem colidir com as paredes ou com seu próprio corpo.
 
 ---
 
-## 🔧 **Troubleshooting (Solução de Problemas)**
+## 🧠 Como Funciona
 
-### Problema 1: "SDL.h file not found"
+### Deep Q-Learning (DQN)
+
+O agente utiliza uma rede neural para aproximar a função Q, que estima o valor de tomar uma ação específica em um estado dado.
+
+### Entrada da Rede Neural (11 características):
+
+1. **Perigo à frente** (1 valor)
+2. **Perigo à direita** (1 valor)
+3. **Perigo à esquerda** (1 valor)
+4. **Direção atual do movimento** (4 valores: esquerda, direita, cima, baixo)
+5. **Localização da comida relativa à cabeça** (4 valores: esquerda, direita, cima, baixo)
+
+### Saída da Rede Neural (3 ações):
+
+- **Ação 0:** Continuar em frente
+- **Ação 1:** Virar à direita
+- **Ação 2:** Virar à esquerda
+
+### Sistema de Recompensas:
+
+- **+10 pontos:** Quando a cobra come a comida
+- **-10 pontos:** Quando a cobra colide (parede ou próprio corpo)
+
+### Estratégia de Exploração (ε-greedy):
+
+- Inicialmente, o agente explora mais (movimentos aleatórios)
+- Gradualmente, explora menos e explora mais (usa a rede neural)
+- O valor de ε diminui conforme o número de jogos aumenta: `ε = 80 - n_games`
+
+### Memória de Experiência (Replay Buffer):
+
+O agente armazena experiências (estado, ação, recompensa, próximo estado) em uma memória de replay:
+
+- **Treinamento de memória curta:** Aprende imediatamente após cada ação
+- **Treinamento de memória longa:** Aprende a partir de um batch aleatório de experiências passadas (tamanho: 1000)
+
+### Parâmetros de Treinamento:
+
+- `MAX_MEMORY = 100,000` - Tamanho máximo da memória de replay
+- `BATCH_SIZE = 1000` - Tamanho do batch para treinamento
+- `LR = 0.001` - Taxa de aprendizado
+- `gamma = 0.9` - Fator de desconto para recompensas futuras
+
+---
+
+## 🔧 Troubleshooting
+
+### Problema 1: "SDL.h file not found" (macOS)
+
 **Causa:** SDL2 não está instalado ou não está sendo encontrado.
+
 **Solução:**
 ```bash
+# Instalar SDL2
 brew install sdl2 sdl2_image sdl2_mixer sdl2_ttf
+
+# Reinstalar pygame
 pip uninstall pygame
 pip install pygame
 ```
 
-### Problema 2: "ModuleNotFoundError: No module named 'torch'"
+### Problema 2: "SDL.h file not found" (Windows)
+
+**Causa:** Pygame tentando compilar do código-fonte.
+
+**Solução:**
+```cmd
+# Desinstalar pygame
+pip uninstall pygame
+
+# Instalar versão pré-compilada
+pip install pygame
+
+# Se ainda não funcionar, tente:
+pip install pygame --only-binary :all:
+```
+
+### Problema 3: "ModuleNotFoundError: No module named 'torch'"
+
 **Causa:** As dependências não foram instaladas.
+
 **Solução:**
 ```bash
+# macOS/Linux
+pip install -e .
+
+# Windows
 pip install -e .
 ```
 
-### Problema 3: "arial.ttf not found"
-**Causa:** O arquivo de fonte não está no diretório correto.
-**Solução:** Certifique-se de estar executando o comando dentro da pasta `snake-ai-pytorch`:
-```bash
-cd /Users/luccaromagnolli/Documents/Neural-Networks/snake-ai-pytorch
-python agent.py
-```
-
 ### Problema 4: Erro ao instalar PyTorch
+
 **Causa:** Problemas de compatibilidade ou falta de espaço.
-**Solução:** Instale o PyTorch separadamente:
+
+**Solução:**
 ```bash
+# Instalar PyTorch separadamente (CPU)
 pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+# Ou com suporte CUDA (se tiver GPU NVIDIA)
+pip install torch --index-url https://download.pytorch.org/whl/cu118
 ```
 
-### Problema 5: Janela do jogo não abre
-**Causa:** Problemas com o display gráfico (comum em servidores remotos).
-**Solução:** Se estiver em um servidor remoto, você precisará de X11 forwarding ou usar um ambiente com interface gráfica.
+### Problema 5: "arial.ttf not found"
+
+**Causa:** O arquivo de fonte não está no diretório correto.
+
+**Solução:** Certifique-se de estar executando o comando dentro da pasta `snake-ai-pytorch`:
+
+```bash
+# Verificar localização
+pwd  # macOS/Linux
+cd   # Windows
+
+# Navegar até o diretório correto
+cd /caminho/para/snake-ai-pytorch
+```
+
+### Problema 6: Janela do jogo não abre (Windows)
+
+**Causa:** Problemas com o display gráfico ou drivers.
+
+**Solução:**
+1. Atualize os drivers da sua placa gráfica
+2. Certifique-se de que está executando em um ambiente com interface gráfica
+3. Tente executar como administrador
+
+### Problema 7: Erro de permissão ao instalar (macOS)
+
+**Causa:** Problemas de permissão com pip.
+
+**Solução:**
+```bash
+# Usar --user
+pip install --user -e .
+
+# Ou corrigir permissões
+sudo chown -R $(whoami) /usr/local/lib/python3.13/site-packages
+```
+
+### Problema 8: Ambiente virtual não ativa (Windows)
+
+**Causa:** Política de execução do PowerShell.
+
+**Solução:**
+```powershell
+# Executar no PowerShell como administrador
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
 
 ---
 
-## 📊 **Entendendo o Treinamento**
+## 📁 Estrutura do Projeto
 
-### Como a IA Aprende:
-1. **Estado:** A IA observa 11 características do jogo:
-   - Perigo à frente, direita e esquerda
-   - Direção atual (4 valores)
-   - Localização da comida relativa à cabeça (4 valores)
+```
+snake-ai-pytorch/
+├── agent.py              # Implementação do agente de aprendizado por reforço
+├── game.py               # Lógica do jogo Snake para treinamento da IA
+├── model.py              # Arquitetura da rede neural e treinador
+├── helper.py             # Funções auxiliares para visualização
+├── snake_game_human.py   # Versão do jogo para jogadores humanos
+├── arial.ttf             # Fonte para renderização de texto
+├── pyproject.toml        # Configuração do projeto e dependências
+└── model/                # Criado automaticamente durante o treinamento
+    └── model.pth         # Modelo salvo quando bate recorde
+```
 
-2. **Ação:** A IA escolhe entre 3 ações:
-   - Continuar em frente
-   - Virar à direita
-   - Virar à esquerda
+### Descrição dos Arquivos:
 
-3. **Recompensa:**
-   - +10 pontos: Quando come a comida
-   - -10 pontos: Quando colide
+- **`agent.py`**: Contém a classe `Agent` que implementa o algoritmo DQN e a lógica de treinamento
+- **`game.py`**: Implementa a classe `SnakeGameAI` com a lógica do jogo Snake
+- **`model.py`**: Define a arquitetura da rede neural (`Linear_QNet`) e o treinador (`QTrainer`)
+- **`helper.py`**: Funções para plotar gráficos em tempo real do progresso do treinamento
+- **`snake_game_human.py`**: Versão do jogo para jogadores humanos testarem suas habilidades
+- **`arial.ttf`**: Fonte TrueType necessária para renderizar o texto da pontuação no jogo
 
-4. **Aprendizado:**
-   - **Memória curta:** Aprende imediatamente após cada ação
-   - **Memória longa:** Aprende de experiências passadas (replay buffer)
+---
 
-### Progresso Esperado:
+## 📊 Progresso Esperado do Treinamento
+
+Durante o treinamento, você pode esperar:
+
 - **Jogos 1-10:** Pontuação baixa (0-2), muitos movimentos aleatórios
 - **Jogos 10-50:** Começa a melhorar, pontuação média 2-5
 - **Jogos 50-100:** Melhora significativa, pontuação média 5-10
 - **Jogos 100+:** Pode alcançar pontuações altas (10-20+)
 
-**Nota:** O treinamento pode levar várias horas para alcançar um bom desempenho. Seja paciente!
+**Nota:** O treinamento pode levar várias horas para alcançar um bom desempenho. Seja paciente e observe a melhoria gradual nas pontuações!
 
 ---
 
-## 📁 **Estrutura de Arquivos Após Execução**
+## 🎯 Melhorias Futuras
 
-Após executar o treinamento, você verá:
-```
-snake-ai-pytorch/
-├── agent.py
-├── game.py
-├── model.py
-├── helper.py
-├── snake_game_human.py
-├── arial.ttf
-├── pyproject.toml
-└── model/              # Criado automaticamente
-    └── model.pth       # Modelo salvo quando bate recorde
-```
+Algumas melhorias possíveis para o projeto:
+
+- ✅ Implementar Double DQN
+- ✅ Adicionar Dueling DQN
+- ✅ Implementar experiência prioritizada (Prioritized Experience Replay)
+- ✅ Adicionar mais características ao estado (visão da grade completa)
+- ✅ Ajustar hiperparâmetros para melhor desempenho
+- ✅ Adicionar suporte para GPU (CUDA)
 
 ---
 
-## ✅ **Checklist Final**
+## ✅ Checklist de Instalação
 
 Antes de executar, verifique:
+
 - [ ] Python 3.13+ instalado
-- [ ] Homebrew instalado (macOS)
-- [ ] SDL2 instalado via Homebrew
+- [ ] Homebrew instalado (macOS) ou Visual C++ Build Tools (Windows)
+- [ ] SDL2 instalado via Homebrew (macOS) ou pygame instalado (Windows)
 - [ ] Dependências Python instaladas (`pip install -e .`)
 - [ ] Arquivo `arial.ttf` presente
 - [ ] No diretório correto (`snake-ai-pytorch`)
+- [ ] Ambiente virtual criado e ativado (recomendado)
 
 ---
 
-## 🎯 **Próximos Passos**
+## 📝 Licença
 
-Depois de conseguir executar o projeto:
-1. **Ajustar hiperparâmetros:** Modifique valores em `agent.py`:
-   - `MAX_MEMORY`: Tamanho da memória de replay
-   - `BATCH_SIZE`: Tamanho do batch de treinamento
-   - `LR`: Taxa de aprendizado
-   - `gamma`: Fator de desconto
-
-2. **Melhorar a rede neural:** Modifique `model.py` para adicionar mais camadas ou neurônios
-
-3. **Adicionar mais características:** Modifique `agent.py` -> `get_state()` para incluir mais informações sobre o estado do jogo
+Este projeto é de código aberto e está disponível para uso educacional e pessoal.
 
 ---
 
-**Boa sorte com o treinamento!**
+## 👨‍💻 Autor
+
+**Lucca Maximus Romagnolli**
+
+Desenvolvido como projeto de aprendizado em Deep Reinforcement Learning.
+
+---
+
+## 🙏 Agradecimentos
+
+Este projeto foi desenvolvido como uma implementação educacional do algoritmo Deep Q-Learning para aprendizado por reforço.
+
+---
+
+**Boa sorte com o treinamento! 🚀**
 
